@@ -94,3 +94,16 @@ test("rejects backtick info strings containing a backtick", () => {
 	const result = runPlan("```markdown `invalid`\n## Example only\n```\n", 1);
 	expect(result.stderr).toContain('"## Example only" after Close the program is not an appendix');
 });
+
+test("accepts Antigravity schedule marker in Program checklist", () => {
+	const directory = mkdtempSync(join(tmpdir(), "check-plan-test-"));
+	const file = join(directory, "plan.md");
+	writeFileSync(file, validPlan.replace("/loop 1h", "schedule tool"));
+	try {
+		const result = spawnSync("node", [checker, file], { encoding: "utf8" });
+		expect(result.status).toBe(0);
+	} finally {
+		rmSync(directory, { recursive: true, force: true });
+	}
+});
+

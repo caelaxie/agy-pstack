@@ -8,15 +8,15 @@ disable-model-invocation: true
 
 Benny ships as a dormant automation pack inside pstack. The plugin manifest exposes only pstack's normal skill root; this file and the two operational files are not slash skills.
 
-The human enters setup by pointing Cursor at the pack's `FOR_AGENTS.md`. The bootstrap flow copies the whole pack into the target repository, then reads this file directly at `.cursor/automations/benny/skills/setup-benny/SKILL.md`.
+The human enters setup by pointing Cursor or Antigravity at the pack's `FOR_AGENTS.md`. The bootstrap flow copies the whole pack into the target repository, then reads this file directly at `.cursor/automations/benny/skills/setup-benny/SKILL.md`.
 
-Benny needs external configuration and two live Cursor automations.
+Benny needs external configuration and two live Cursor automations (or Antigravity `/automation` sidecars).
 
 Do not create or update an automation until the user explicitly asks. Never put a secret value in plugin files, prompts, or committed configuration.
 
 ## 1. Copy the pack and enable shared pstack skills
 
-Do this before asking for Benny configuration and before invoking the built-in `/automate` skill.
+Do this before asking for Benny configuration and before invoking the built-in `/automate` skill (or `/automation` on Antigravity).
 
 Ask which repository will run the automations. The source pack is the directory containing `FOR_AGENTS.md`. The destination is `<target-repository>/.cursor/automations/benny/`.
 
@@ -31,7 +31,7 @@ Merge the entire source pack into the destination:
 
 If this file is already being read from the target destination, treat the copy as complete and run the same verification before continuing.
 
-Add pstack to the target repository's `.cursor/settings.json`. If the file or `.cursor` directory does not exist, create it.
+Add pstack to the target repository's `.cursor/settings.json` (and on Antigravity, also register `pstack` in `.agents/plugins.json`). If the file or directory does not exist, create it.
 
 Merge this entry into the existing JSON or JSONC:
 
@@ -109,7 +109,7 @@ Ask for or confirm:
 - Polling and effort budgets
 - Model slug for triage, repro, code work, and media review
 
-Use only model slugs shown as available in the user's Cursor model picker or supported model list. Do not guess a slug and do not carry over a private default.
+Use only model slugs shown as available in the user's Cursor model picker or supported model list (or `agy models` / Antigravity model tiers). Do not guess a slug and do not carry over a private default.
 
 The source channel, triage identity, repository, tracker adapter, control skill, and feature map must be explicit. Fail setup if any required value stays ambiguous.
 

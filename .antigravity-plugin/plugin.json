@@ -1,0 +1,12 @@
+{
+  "name": "pstack",
+  "displayName": "pstack",
+  "version": "0.15.23",
+  "description": "if you want to go fast, go deep first. pstack helps you write less, but higher quality code. rigorous agent workflows you can parallelize with confidence.",
+  "logo": "assets/logo.png",
+  "suggestedPrompts": [
+    "/poteto-mode reproduce and fix this bug with runtime evidence",
+    "/how walk me through how this subsystem works",
+    "/interrogate adversarially review the current branch diff"
+  ]
+}
