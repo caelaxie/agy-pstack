@@ -52,9 +52,11 @@ prs=$(mktemp)
 gh pr list --author "@me" --state all --limit 1000 \
 	--json number,state,headRefName 2>/dev/null > "$prs" || echo "[]" > "$prs"
 
-# Transcripts dir: ~/.cursor/projects/<slugified-repo-path>/agent-transcripts.
+# Transcripts dirs: ~/.cursor/projects/<slugified-repo-path>/agent-transcripts
+# and ~/.gemini/antigravity-cli/brain (Antigravity).
 slug=$(printf '%s' "$main_wt" | sed 's#^/##; s#/#-#g')
 transcripts="$HOME/.cursor/projects/$slug/agent-transcripts"
+agy_brain="$HOME/.gemini/antigravity-cli/brain"
 now=$(date +%s)
 
 echo "# base: $base"
@@ -94,8 +96,11 @@ git worktree list --porcelain | awk '/^worktree /{print $2}' | while read -r wt;
 	# Most recent chat whose transcript operated in this worktree. Match path
 	# followed by "/" or a quote so glint-482 does not match glint-482-r37.
 	last="-"; last_ts=0
-	if [ -d "$transcripts" ]; then
-		f=$(rg -l -e "${wt}/" -e "${wt}\"" "$transcripts" 2>/dev/null \
+	search_dirs=()
+	[ -d "$transcripts" ] && search_dirs+=("$transcripts")
+	[ -d "$agy_brain" ] && search_dirs+=("$agy_brain")
+	if [ "${#search_dirs[@]}" -gt 0 ]; then
+		f=$(rg -l -e "${wt}/" -e "${wt}\"" "${search_dirs[@]}" 2>/dev/null \
 			| xargs stat -f '%m %N' 2>/dev/null | sort -rn | head -1)
 		if [ -n "$f" ]; then last_ts=$(echo "$f" | awk '{print $1}')
 			last=$(date -r "$last_ts" '+%Y-%m-%d' 2>/dev/null); fi
