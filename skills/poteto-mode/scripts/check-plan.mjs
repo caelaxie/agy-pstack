@@ -17,7 +17,7 @@ const SUB_BLOCKS = [
 	"Merge.",
 ];
 const PROGRAM_H3 = ["Arm the program", "Spawn owners", "PR mechanics", "Verdict and merge", "Boot recipe"];
-const PROGRAM_MARKERS = ["git show origin/main:", "/schedule 1h", "status message"];
+const PROGRAM_MARKERS = ["/schedule 1h", "status message"];
 const HOW_TO_READ_MARKERS = [
 	"One box is one unit of work",
 	"names the evidence",
@@ -113,8 +113,15 @@ else {
 		if (at === -1) fail(program.n, `Program checklist lacks "### ${name}" in order`);
 		else cursor = at + 1;
 	}
+	const programBody = bodyText(program);
+	if (
+		!programBody.includes("git show origin/main:") &&
+		!programBody.includes("~/.gemini/config/plugins/pstack/")
+	) {
+		fail(program.n, 'Program checklist lacks "git show origin/main:" or "~/.gemini/config/plugins/pstack/"');
+	}
 	for (const marker of PROGRAM_MARKERS) {
-		if (!bodyText(program).includes(marker)) fail(program.n, `Program checklist lacks "${marker}"`);
+		if (!programBody.includes(marker)) fail(program.n, `Program checklist lacks "${marker}"`);
 	}
 }
 

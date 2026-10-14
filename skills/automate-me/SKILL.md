@@ -14,7 +14,7 @@ This skill orchestrates three others: an inline mining pass (see step 1), Antigr
 
 ### 0. Check for an existing skill
 
-Look recursively for `.agents/skills/**/*-mode/SKILL.md` and `~/.agents/skills/*-mode/SKILL.md` matching the user's handle. Mode skills can live in a personal category directory (`.agents/skills/<handle>/`), not only at the top level. If one exists, confirm intent with `ask_question` (unless they already said "update my skill" or similar):
+Look for `.agents/skills/**/*-mode/SKILL.md`, `~/.gemini/config/skills/*-mode/SKILL.md`, and `~/.agents/skills/*-mode/SKILL.md` matching the user's handle. Mode skills typically live at `.agents/skills/<handle>-mode/SKILL.md` (or in a category directory `.agents/skills/<handle>/<handle>-mode/SKILL.md` registered in `.agents/skills.json`). If one exists, confirm intent with `ask_question` (unless they already said "update my skill" or similar):
 
 - Update the existing skill (default for repeat runs)
 - Start fresh (rare, ask why before doing it)
@@ -66,7 +66,7 @@ The **poteto-mode** skill shows the shape. Read it for granularity. Don't copy i
 
 Use Antigravity's built-in `agy-customizations` skill to author the skill. Placement:
 
-- Path: preserve an existing mode skill's category. For a new mode, use `.agents/skills/<handle>/<handle>-mode/SKILL.md` when the repo has an established personal category for that handle. Otherwise default to `.agents/skills/<handle>-mode/SKILL.md` in the project (or `~/.agents/skills/<handle>-mode/` if the user prefers a personal skill).
+- Path: preserve an existing mode skill's location. For a new mode, default to `.agents/skills/<handle>-mode/SKILL.md` in the project (or `~/.gemini/config/skills/<handle>-mode/SKILL.md` if the user prefers a personal global skill). If the repo uses a personal category directory (`.agents/skills/<handle>/<handle>-mode/SKILL.md`), register `.agents/skills/<handle>` in `.agents/skills.json` so Antigravity discovers it.
 - Handle: the user's first name or chosen identifier.
 - Frontmatter `description`: trigger on their name + `/<handle>-mode` + "work in their style", not on generic keywords like "write code" or "review PR".
 - Frontmatter formatting: follow `agy-customizations`'s YAML rules. Keep `description` as one YAML scalar. Quote it or use `description: >-` with indented continuation lines when punctuation or wrapping requires it.

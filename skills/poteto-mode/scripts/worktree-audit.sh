@@ -52,8 +52,11 @@ prs=$(mktemp)
 gh pr list --author "@me" --state all --limit 1000 \
 	--json number,state,headRefName 2>/dev/null > "$prs" || echo "[]" > "$prs"
 
-# Transcripts dir: ~/.gemini/antigravity-cli/brain/<conversation-id>/.system_generated/logs/transcript.jsonl.
-transcripts="$HOME/.gemini/antigravity-cli/brain"
+# Transcripts dirs: ~/.gemini/antigravity*/brain/<conversation-id>/.system_generated/logs/transcript.jsonl.
+transcript_dirs=()
+for d in "$HOME/.gemini/antigravity-cli/brain" "$HOME/.gemini/antigravity/brain" "$HOME/.gemini/antigravity-ide/brain"; do
+	[ -d "$d" ] && transcript_dirs+=("$d")
+done
 now=$(date +%s)
 
 echo "# base: $base"
@@ -93,8 +96,8 @@ git worktree list --porcelain | awk '/^worktree /{print $2}' | while read -r wt;
 	# Most recent chat whose transcript operated in this worktree. Match path
 	# followed by "/" or a quote so glint-482 does not match glint-482-r37.
 	last="-"; last_ts=0
-	if [ -d "$transcripts" ]; then
-		f=$(rg --hidden -l -g 'transcript.jsonl' -e "${wt}/" -e "${wt}\"" "$transcripts" 2>/dev/null \
+	if [ "${#transcript_dirs[@]}" -gt 0 ]; then
+		f=$(rg --hidden -l -g 'transcript.jsonl' -e "${wt}/" -e "${wt}\"" "${transcript_dirs[@]}" 2>/dev/null \
 			| xargs stat -f '%m %N' 2>/dev/null | sort -rn | head -1)
 		if [ -n "$f" ]; then last_ts=$(echo "$f" | awk '{print $1}')
 			last=$(date -r "$last_ts" '+%Y-%m-%d' 2>/dev/null); fi
