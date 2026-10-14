@@ -4,11 +4,10 @@ In this page you install the plugin, pick which models pstack uses, and run your
 
 ## Install the plugin
 
-Install and enable the plugin with the Antigravity CLI:
+Install the plugin with the Antigravity CLI:
 
 ```bash
-agy plugin install /path/to/agy-pstack
-agy plugin enable pstack
+agy plugin install https://github.com/open-pstack/agy-pstack
 ```
 
 ## Pick your models
