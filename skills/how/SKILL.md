@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Explore the codebase to answer "how does X work?" questions. Produce architectural explanations at the level of a senior engineer onboarding onto a subsystem, enough to build a working mental model, not so much that it reads like annotated source code.
 
-Every spawn is a read-only subagent (`Task` with `subagent_type: generalPurpose` and `readonly: true` on Cursor; `invoke_subagent` with `TypeName: "research"` on Antigravity). Explorers use the `how explorer` line in the `pstack-models.mdc` / `pstack-models.md` rule (default `grok-4.7-xhigh-fast` on Cursor, `Model: "flash"` or `"inherit"` on Antigravity `invoke_subagent`), and every explainer uses the `how explainer` line (default `claude-opus-5-5-xhigh` on Cursor, `Model: "pro"` or `"inherit"` on Antigravity). Set `model` to that line's value, or to the default if the rule or the line is missing. Leave `model` unset (or `"inherit"`) when the value is `auto` or `inherit-parent`. If the subagent tool rejects a slug, use the default and say so. If it rejects the default, use the closest valid slug of the same family from its error message.
+Every spawn uses `invoke_subagent` with `TypeName: "research"`. Explorers use the `how explorer` line in `~/.gemini/config/rules/pstack-models.md` (default `Model: "flash"`), and every explainer uses the `how explainer` line (default `Model: "pro"`). Set `Model` to that line's value, or to the default if the rule or the line is missing. Use `Model: "inherit"` when the value is `inherit`, `auto`, or `inherit-parent`.
 
 ## 1. Assess complexity
 

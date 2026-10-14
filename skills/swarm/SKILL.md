@@ -22,14 +22,12 @@ Open a todolist with one entry per phase before launching anything.
 1. State the done predicate and the artifact or report the swarm must return.
 2. Choose the shape. Partition into slices, race N workers on identical briefs, or mix both. For a race or mixed shape, declare `first pass`, `rank all`, or `best-of` before spawning.
 3. Set N from the user or derive it from the shape. N is total workers, not the cloud concurrency limit.
-4. Pick the worker model from the `swarm workers` line in `~/.cursor/rules/pstack-models.mdc` or `~/.gemini/config/rules/pstack-models.md`. If the rule or that line is missing, use `grok-4.7-xhigh-fast` (or `Model: "flash"` / `"inherit"` on Antigravity `invoke_subagent`). For `auto` or `inherit-parent`, omit `model` (or pass `Model: "inherit"`) so the workers run on the parent model. If the subagent tool rejects a slug, use the default and say so. If it rejects the default, use the closest valid slug of the same family from its error message. For a model race, name each arm's model up front.
-5. Give each worker its own writable output when it writes. When workers verify or measure commits, each brief names the exact SHAs. A measurement brief also names the method (sample count, what one sample is, order). The worker records both in its result.
+4. Pick the worker model tier from the `swarm workers` line in `~/.gemini/config/rules/pstack-models.md`. If the rule or that line is missing, use `Model: "flash"`. For `inherit`, `auto`, or `inherit-parent`, pass `Model: "inherit"` so the workers run on the parent model. For a model race, name each arm's model tier up front.
+5. Give each worker its own writable output when it writes (`Workspace: "branch"` when modifying repo files). When workers verify or measure commits, each brief names the exact SHAs. A measurement brief also names the method (sample count, what one sample is, order). The worker records both in its result.
 
 ## Phase B: Fan out
 
-Spawn all N workers in one message (`Task` with `subagent_type: generalPurpose`, `environment: "cloud"`, `run_in_background: true` on Cursor; `invoke_subagent` with `TypeName: "self"` or `"research"` and `Workspace: "branch"` on Antigravity) and the step 4 model, left unset (or `"inherit"`) for `auto` or `inherit-parent`. Use `environment: "local"` (Cursor) or `Workspace: "inherit"` (Antigravity) only when the worker needs access to something on the user's computer.
-
-When a worker must start from a non-default pushed branch on Cursor cloud, pass `cloud_base_branch`.
+Spawn all N workers in one `invoke_subagent` call with `TypeName: "self"` (or `"poteto-agent"` for code-writing workers), `Workspace: "branch"` when isolating git changes, and the step 4 `Model` tier.
 
 Every brief stands alone. Include the goal, scope, exact slice or race arm, how to verify, and what to report. Reports use `PASS`, `ISSUES`, or `BLOCKED` with evidence. A worker that can prove a defect reports `ISSUES` and lists every issue it can prove, not only the first.
 
