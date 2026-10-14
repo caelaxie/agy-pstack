@@ -10,7 +10,7 @@ Answer the user's question about pstack, hand them a prompt they can send, and l
 
 A message that asks for work, such as "use pstack to fix this bug", is not a help question. Read [`poteto-mode`](../poteto-mode/SKILL.md) and do the work under it.
 
-This file maps questions to the skills and guide pages that hold the answers. Those files own the details. Read the file you route to before you quote it, and trust it when it disagrees with this map. The links here point into the installed plugin, which the user may not be able to open, so give the user the file's public copy: `https://github.com/caelaxie/agy-pstack/blob/main/` followed by its path.
+This file maps questions to the skills and guide pages that hold the answers. Those files own the details. Read the file you route to before you quote it, and trust it when it disagrees with this map. The links here point into the installed plugin, which the user may not be able to open, so give the user the file's public copy: `https://github.com/open-pstack/agy-pstack/blob/main/` followed by its path.
 
 ## Find out what they need
 
@@ -34,7 +34,7 @@ When the model rule is missing and it matters, ask whether the user wants to pic
 
 ## Get set up
 
-1. Install with `agy plugin install /path/to/agy-pstack` and `agy plugin enable pstack`.
+1. Install with `agy plugin install https://github.com/open-pstack/agy-pstack`.
 2. Run [`/setup-pstack`](../setup-pstack/SKILL.md). It asks for a reasoning budget, maps a model tier (`pro`, `flash`, `flash_lite`, or `inherit`) to each role, and writes `~/.gemini/config/rules/pstack-models.md`. The rule applies to new chats.
 3. Start a real task with `/poteto-mode`, a goal, and a check that can pass or fail.
 
@@ -68,10 +68,13 @@ The default answer is `/poteto-mode`, which runs most of the others when its ste
 | Have different models review a diff and try to break it | [`/interrogate`](../interrogate/SKILL.md) |
 | Fix a bug test-first when a cheap local test exists | [`/tdd`](../tdd/SKILL.md) |
 | Apply TypeScript rules to `.ts` or `.tsx` work | [`/typescript-best-practices`](../typescript-best-practices/SKILL.md) |
+| Remove AI-generated code slop and clean up code style before commit | [`/deslop`](../deslop/SKILL.md) |
 | Strip comments before review, using a reviewer that didn't write them | [`/no-comments`](../no-comments/SKILL.md) |
 | Clean AI tells out of prose | [`/unslop`](../unslop/SKILL.md) |
 | Write docs, an RFC, a README, a PR description, or a commit message to a standard | [`/technical-writing`](../technical-writing/SKILL.md) |
 | Hear the last reply again in plain words | [`/bro`](../bro/SKILL.md) |
+| Drive, inspect, and profile an interactive CLI or TUI locally | [`/control-cli`](../control-cli/SKILL.md) |
+| Drive and inspect a web, IDE, or Electron UI with a local browser/CDP harness | [`/control-ui`](../control-ui/SKILL.md) |
 | Give agents a scripted way to drive the app and prove behavior | [`/create-verification-skill`](../create-verification-skill/SKILL.md) |
 | Bring a verification skill and its feature map back in line with the app | [`/maintain-verification-skill`](../maintain-verification-skill/SKILL.md) |
 | Vet a performance number before reporting or acting on it | [`/benchmark-checklist`](../benchmark-checklist/SKILL.md) |
