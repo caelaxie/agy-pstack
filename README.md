@@ -9,7 +9,7 @@ See the [upstream pstack README](https://github.com/cursor/plugins/blob/main/pst
 Install the plugin with the Antigravity CLI:
 
 ```bash
-agy plugin install https://github.com/open-pstack/agy-pstack
+agy plugin install https://github.com/pstack-ports/agy-pstack
 ```
 
 Verify the installation:

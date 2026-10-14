@@ -6,8 +6,8 @@
   "author": {
     "name": "Lauren Tan"
   },
-  "homepage": "https://github.com/open-pstack/agy-pstack",
-  "repository": "https://github.com/open-pstack/agy-pstack",
+  "homepage": "https://github.com/pstack-ports/agy-pstack",
+  "repository": "https://github.com/pstack-ports/agy-pstack",
   "license": "MIT",
   "keywords": [
     "pstack",
