@@ -82,7 +82,7 @@ continue
 keep going until done
 ```
 
-Short works because the playbook holds the structure, and a Custom Mode keeps `/poteto-mode` in context on every turn. [Set up pstack](./01-setup.md#run-your-first-task) shows how to start one. Your words carry the intent, and the skill carries the rigor.
+Short works because the playbook holds the structure. [Set up pstack](./01-setup.md#run-your-first-task) shows how to start. Your words carry the intent, and the skill carries the rigor.
 
 ## Switch tasks with "new task"
 
@@ -94,11 +94,9 @@ A long chat accumulates context from the last task. When you change subjects, sa
 
 "new task" tells `/poteto-mode` to re-match rather than continue the prior playbook. "don't change any code yet" pins this one to Investigation. Without those two phrases, a mode mid-Feature tends to treat your question as the next feature step.
 
-## Give parallel work its own machine
+## Isolate parallel work
 
-If you run several agents against one repository on one computer, they will fight over the working tree, the ports, and the build output. On Cursor, the cleanest isolation is a [cloud subagent](https://cursor.com/docs/subagents#cloud-subagents), where each one gets its own VM and branch (`type /in-cloud` before the task, or ask the parent chat to hand work to cloud subagents). On Antigravity, subagents spawned with `Workspace: "branch"` each get an isolated branched workspace automatically.
-
-When the work has to stay local, ask for a worktree up front:
+If you run several agents against one repository on one computer, they will fight over the working tree, the ports, and the build output. Pass `Workspace: "branch"` or `Workspace: "share"` when spawning subagents via `invoke_subagent`, or ask for a worktree up front:
 
 ```text
 /poteto-mode new task. branch off <base> in a fresh worktree, then port the parser change there.

@@ -1,31 +1,21 @@
-# pstack
+# agy-pstack
 
-Port of [`pstack`](https://github.com/cursor/plugins/tree/main/pstack) (`v0.15.23`) from [`cursor/plugins`](https://github.com/cursor/plugins) by [Lauren Tan (poteto)](https://x.com/poteto), adapted to run in both Cursor and Google Antigravity (`agy`).
+Antigravity (`agy`) port of [pstack](https://github.com/cursor/plugins/tree/main/pstack) (`0.15.23`) by [Lauren Tan (poteto)](https://x.com/poteto).
+
+See the [upstream pstack README](https://github.com/cursor/plugins/blob/main/pstack/README.md) and the [guide](./docs/guide/README.md) for usage and documentation.
 
 ## Install
 
-### Cursor
-
-From the Cursor plugin marketplace:
+Clone the repository and install the plugin with the Antigravity CLI:
 
 ```bash
-/add-plugin pstack
+git clone https://github.com/caelaxie/agy-pstack.git
+agy plugin install ./agy-pstack
+agy plugin enable pstack
 ```
 
-Or load this repository directly as a local plugin in Cursor.
-
-### Google Antigravity (`agy`)
-
-Install from a local checkout or git repository URL:
+Verify the installation:
 
 ```bash
-agy plugin install <path-or-git-url>
+agy plugin list
 ```
-
-## Porting to other harnesses
-
-See [`PORTING.md`](./PORTING.md) for step-by-step instructions on porting `pstack` to another agent harness (such as Codex).
-
-## License
-
-MIT
