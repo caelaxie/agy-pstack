@@ -28,6 +28,6 @@ Show each action item as a before and after, side by side, in a visual. For a ch
 
 ## Visuals
 
-A visual is a picture: a screenshot, a video, a Mermaid diagram, a chart or diagram from `/visualize`, or a generated image. A Markdown table is not a visual, even with a before column and an after column.
+A visual is a picture: a screenshot, a video, a Mermaid diagram, a chart or diagram from [`/show-me`](../show-me/SKILL.md), or a generated image (`image-generator` subagent). A Markdown table is not a visual, even with a before column and an after column.
 
-Use screenshots or a video when the change is visible. If a visible change has none, add it to the visual of what happened, marked "No screenshot yet." For anything else, draw the visual from facts you have: a Mermaid diagram for states, flows, and structures, and a `/visualize` chart for numbers. Never invent a number, and never draw or generate a picture of a screen you did not capture. Link only artifacts that exist.
+Use screenshots or a video when the change is visible. If a visible change has none, add it to the visual of what happened, marked "No screenshot yet." For anything else, draw the visual from facts you have: a Mermaid diagram for states, flows, and structures, and a Mermaid `xychart-beta` or [`/show-me`](../show-me/SKILL.md) chart for numbers. Never invent a number, and never draw or generate a picture of a screen you did not capture. Link only artifacts that exist.

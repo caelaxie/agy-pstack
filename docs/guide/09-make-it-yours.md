@@ -93,7 +93,7 @@ Read every output yourself before accepting the verdict. If you disagree with th
 
 ## Build a bot UI with `/make-bot-ui`
 
-One situational skill is for Grok Bot users. [`/make-bot-ui`](../../skills/make-bot-ui/SKILL.md) builds a small page whose buttons wake a bot over a webhook routine. For example, you could swipe through a review queue and have each swipe ask the bot to act on that item. A server on your machine holds the webhook's sender key, so the key never reaches the browser or the chat. The skill also covers exposing the page on Tailscale.
+[`/make-bot-ui`](../../skills/make-bot-ui/SKILL.md) builds a small page whose buttons wake an agent through a local server (`agy agentapi` or a webhook). For example, you could swipe through a review queue and have each swipe ask the agent to act on that item. A server on your machine holds any webhook sender key, so the key never reaches the browser or the chat. The skill also covers exposing the page on Tailscale.
 
 **Pitfall:** don't edit a skill mid-task because it's misbehaving. Fix it in its own PR and keep the task moving. A skill edit that ships tangled into feature work is invisible to review and impossible to evaluate.
 
