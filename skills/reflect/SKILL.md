@@ -20,7 +20,7 @@ If the transcript file is unavailable, pass a tight digest of the session instea
 
 One `invoke_subagent` call with three entries, `TypeName: "self"` (agent mode). Reviewers need MCP access to look up the tickets, chat threads, and observability traces the transcript references, and `TypeName: "research"` strips MCPs.
 
-Each reviewer and the synthesizer name a role line in `~/.gemini/config/rules/pstack-models.md` and a default. Set `Model` to that line's value, or to the default if the rule or the line is missing. Pass `Model: "inherit"` when the value is `inherit`, `auto`, or `inherit-parent`.
+Each reviewer and the synthesizer name a role line in `~/.gemini/config/rules/pstack-models.md` and a default. Set `Model` to that line's value, or to the default if the rule or the line is missing. Pass `Model: "inherit"` when the value is `inherit`, `auto`, or `inherit-parent`. Pick each subagent's model tier for the job, per the Subagents section of the **poteto-mode** skill.
 
 | Lens | Role line | Default `Model` | Prompt template |
 |---|---|---|---|

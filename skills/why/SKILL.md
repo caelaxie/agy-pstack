@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Investigate the motivation and intent behind code. The companion `how` skill answers what the code does and how it works. `why` answers what forces led to its shape.
 
-Each spawn below names a role line in `~/.gemini/config/rules/pstack-models.md` and a default. Set `Model` to that line's value, or to the default if the rule or the line is missing. Pass `Model: "inherit"` when the value is `inherit`, `auto`, or `inherit-parent`.
+Each spawn below names a role line in `~/.gemini/config/rules/pstack-models.md` and a default. Set `Model` to that line's value, or to the default if the rule or the line is missing. Pass `Model: "inherit"` when the value is `inherit`, `auto`, or `inherit-parent`. Pick each subagent's model tier for the job, per the Subagents section of the **poteto-mode** skill.
 
 Every spawn uses `invoke_subagent` with `TypeName: "self"` (agent mode). **Do not use `TypeName: "research"`** when MCP access is needed. It strips MCP access, which disables the MCP-backed investigators and the synthesizer's citation spot-checks. Investigators still shouldn't write anything.
 
