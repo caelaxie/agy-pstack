@@ -10,7 +10,7 @@ When the task matches no playbook, design one. The deliverable before any code i
 
 ## Start
 
-Open a todolist whose first item is to read the Principles section of the **poteto-mode** skill. Then add the phases below as todos.
+Open a todolist by writing and updating `<appDataDir>/brain/<conversation-id>/task.md` with `write_to_file` (the system prompt names `<appDataDir>` and `<conversation-id>`). Antigravity has no native todolist tool, so that file is the list. Its first item is to read the Principles section of the **poteto-mode** skill. Then add the phases below as todos.
 
 ## Phase A: Frame
 

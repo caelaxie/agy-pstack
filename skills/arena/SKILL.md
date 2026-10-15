@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Arena
 
-Open a todolist with one entry per phase (Frame, Fan out, Cross-judge, Pick, Graft, Verify) before launching anything.
+Open a todolist by writing and updating `<appDataDir>/brain/<conversation-id>/task.md` with `write_to_file` (the system prompt names `<appDataDir>` and `<conversation-id>`). Antigravity has no native todolist tool, so that file is the list. Give it one entry per phase (Frame, Fan out, Cross-judge, Pick, Graft, Verify) before launching anything.
 
 ## Phase A: Frame
 
@@ -14,7 +14,7 @@ Every candidate gets the same prompt, so the prompt is the contract.
 
 1. State the artifact each candidate is producing.
 2. Derive the rubric, 3-6 concrete gradeable criteria for what success looks like on *this* task. It is the picker's tool in Phase D. Candidates only see the task.
-3. Pick the runners. Use the `arena runners` line in `~/.gemini/config/rules/pstack-models.md`. If the rule or that line is missing, default to one each on `Model: "pro"` and `Model: "flash"`. An `inherit`, `auto`, or `inherit-parent` entry in this line or the cross-judge line means the parent model (`Model: "inherit"`). Spawn more runners when the arena covers multiple design directions. Use the same model tier N times when the work is generation-bound rather than judgment-sensitive. Pick each subagent's model tier for the job, per the Subagents section of the **poteto-mode** skill.
+3. Pick the runners. Use the `arena runners` line in `~/.gemini/config/rules/pstack-models.md`. That file is an always-applied rule, already in context when present, so do not `view_file` it. If the rule is not in context or that line is missing, default to one each on `Model: "pro"` and `Model: "flash"`. An `inherit`, `auto`, or `inherit-parent` entry in this line or the cross-judge line means the parent model (`Model: "inherit"`). Spawn more runners when the arena covers multiple design directions. Use the same model tier N times when the work is generation-bound rather than judgment-sensitive. Pick each subagent's model tier for the job, per the Subagents section of the **poteto-mode** skill.
 4. Give each candidate its own output location (a git worktree or `Workspace: "branch"` where possible, otherwise `/tmp/arena-<slug>/candidate-<n>/`), per the **separate-before-serializing-shared-state** principle skill.
 
 ## Phase B: Fan out
@@ -25,7 +25,7 @@ If a candidate produces no output, proceed with N-1 and note the dropout.
 
 ## Phase C: Cross-judge
 
-After all Phase B candidates complete, choose one model tier from the `arena cross-judge pool` line in `~/.gemini/config/rules/pstack-models.md`. If the rule or that line is missing, choose from `pro` and `flash`. Prefer a different tier from the parent's. Spawn one read-only judge subagent (`TypeName: "research"`) on that tier. It sees the rubric and the candidates by path label, scores each criterion, and recommends a base with rationale. It runs in parallel with your reading in Phase D. Don't spawn it while candidates are still writing.
+After all Phase B candidates complete, choose one model tier from the `arena cross-judge pool` line in `~/.gemini/config/rules/pstack-models.md`. That file is an always-applied rule, already in context when present, so do not `view_file` it. If the rule is not in context or that line is missing, choose from `pro` and `flash`. Prefer a different tier from the parent's. Spawn one read-only judge subagent (`TypeName: "research"`) on that tier. It sees the rubric and the candidates by path label, scores each criterion, and recommends a base with rationale. It runs in parallel with your reading in Phase D. Don't spawn it while candidates are still writing.
 
 ## Phase D: Pick a base
 

@@ -10,7 +10,7 @@ Sketch types, function signatures, class shapes, and module boundaries with `not
 
 ## Start
 
-Open a todolist with one entry per phase before starting.
+Open a todolist by writing and updating `<appDataDir>/brain/<conversation-id>/task.md` with `write_to_file` (the system prompt names `<appDataDir>` and `<conversation-id>`). Antigravity has no native todolist tool, so that file is the list. Give it one entry per phase before starting.
 
 1. Ground
 2. Sketch
@@ -28,7 +28,7 @@ Skip Phase A only when the work is genuinely greenfield with no surrounding syst
 
 Run the **arena** skill with the design-sketch task and the Phase A grounding artifacts. Pass `references/runner-prompt.md` as each runner's prompt.
 
-Take the runners from the `architect runners` line in `~/.gemini/config/rules/pstack-models.md`, in place of the `arena runners` line. If the rule or that line is missing, use `pro` and `flash`. Alias and rejected entries follow the runner rules in the **arena** skill's Phase A.
+Take the runners from the `architect runners` line in `~/.gemini/config/rules/pstack-models.md`, in place of the `arena runners` line. That file is an always-applied rule, already in context when present, so do not `view_file` it. If the rule is not in context or that line is missing, use `pro` and `flash`. Alias and rejected entries follow the runner rules in the **arena** skill's Phase A.
 
 Design it twice. Require at least two structurally distinct candidates before synthesis, even when the first looks sufficient. This is the **exhaust-the-design-space** principle skill made concrete. Whole-shape alternatives, not point fixes inside one shape.
 

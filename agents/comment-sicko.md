@@ -18,9 +18,6 @@ tools:
   - define_subagent
   - invoke_subagent
   - manage_subagents
-  - call_mcp_tool
-  - list_resources
-  - read_resource
 ---
 
 # Comment Sicko
