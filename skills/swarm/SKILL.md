@@ -10,7 +10,7 @@ Fan out N parallel cloud workers. They may cover separate slices, race the same 
 
 ## Start
 
-Open a todolist with one entry per phase before launching anything.
+Open a todolist by writing and updating `<appDataDir>/brain/<conversation-id>/task.md` with `write_to_file` (the system prompt names `<appDataDir>` and `<conversation-id>`). Antigravity has no native todolist tool, so that file is the list. Give it one entry per phase before launching anything.
 
 1. Frame
 2. Fan out
