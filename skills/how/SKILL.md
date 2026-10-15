@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Explore the codebase to answer "how does X work?" questions. Produce architectural explanations at the level of a senior engineer onboarding onto a subsystem, enough to build a working mental model, not so much that it reads like annotated source code.
 
-Every spawn uses `invoke_subagent` with `TypeName: "research"`. Explorers use the `how explorer` line in `~/.gemini/config/rules/pstack-models.md` (default `Model: "flash"`), and every explainer uses the `how explainer` line (default `Model: "pro"`). That file is an always-applied rule, already in context when present, so do not `view_file` it. Set `Model` to that line's value, or to the default if the rule is not in context or the line is missing. Use `Model: "inherit"` when the value is `inherit`, `auto`, or `inherit-parent`.
+Every spawn uses `invoke_subagent` with `TypeName: "research"`. Explorers use the `how explorer` line in `~/.gemini/config/rules/pstack-models.md` (default `Model: "flash"`), and every explainer uses the `how explainer` line (default `Model: "pro"`). That file is an always-applied rule, already in context when present, so do not `view_file` it. Set `Model` to that line's value, or to the default if the rule is not in context or the line is missing. Use `Model: "inherit"` when the value is `inherit`, `auto`, or `inherit-parent`. Pick each subagent's model tier for the job, per the Subagents section of the **poteto-mode** skill.
 
 ## 1. Assess complexity
 
