@@ -24,7 +24,7 @@ Before spawning reviewers, state the intent in one clear paragraph from the user
 
 ## Step 3, Spawn Reviewers
 
-Launch all reviewers in a single `invoke_subagent` call, one per entry on the `interrogate reviewers` line in `~/.gemini/config/rules/pstack-models.md`, labeled Reviewer A, B, and so on to match the entry count. If the rule or that line is missing, use the table defaults.
+Launch all reviewers in a single `invoke_subagent` call, one per entry on the `interrogate reviewers` line in `~/.gemini/config/rules/pstack-models.md`, labeled Reviewer A, B, and so on to match the entry count. That file is an always-applied rule, already in context when present, so do not `view_file` it. If the rule is not in context or that line is missing, use the table defaults.
 
 | Subagent | Default model tier |
 |----------|--------------------|
