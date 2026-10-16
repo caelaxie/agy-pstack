@@ -6,8 +6,6 @@ disable-model-invocation: true
 
 # Swarm
 
-Fan out N parallel cloud workers. They may cover separate slices, race the same brief, or mix both. The parent waits, aggregates, and returns one report.
-
 ## Start
 
 Open a todolist by writing and updating `<appDataDir>/brain/<conversation-id>/task.md` with `write_to_file` (the system prompt names `<appDataDir>` and `<conversation-id>`). Antigravity has no native todolist tool, so that file is the list. Give it one entry per phase before launching anything.
@@ -21,7 +19,6 @@ Open a todolist by writing and updating `<appDataDir>/brain/<conversation-id>/ta
 
 1. State the done predicate and the artifact or report the swarm must return.
 2. Choose the shape. Partition into slices, race N workers on identical briefs, or mix both. For a race or mixed shape, declare `first pass`, `rank all`, or `best-of` before spawning.
-3. Set N from the user or derive it from the shape. N is total workers, not the cloud concurrency limit.
 4. Pick the worker model tier from the `swarm workers` line in `~/.gemini/config/rules/pstack-models.md`. That file is an always-applied rule, already in context when present, so do not `view_file` it. If the rule is not in context or that line is missing, use `Model: "flash"`. For `inherit`, `auto`, or `inherit-parent`, pass `Model: "inherit"` so the workers run on the parent model. For a model race, name each arm's model tier up front. Pick each subagent's model tier for the job, per the Subagents section of the **poteto-mode** skill.
 5. Give each worker its own writable output when it writes (`Workspace: "branch"` when modifying repo files). When workers verify or measure commits, each brief names the exact SHAs. A measurement brief also names the method (sample count, what one sample is, order). The worker records both in its result.
 
@@ -36,8 +33,6 @@ If a worker drops out, proceed with N-1 and note it.
 ## Phase C: Aggregate
 
 Read the terminal results. Drop a result that does not record the SHAs and method its brief names, and respawn that worker once. After a second miss, record a gap. A gap does not count as a pass. For coverage, every required slice needs a result. For a race, apply the selection rule declared up front. Use first pass, rank all, or best-of. Do not paste raw worker dumps.
-
-Keep a compact result table, one-line evidenced issues, and explicit gaps or dropouts.
 
 ## Phase D: Report
 
