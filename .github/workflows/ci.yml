@@ -255,12 +255,15 @@ jobs:
                 fail(`Installed plugin version "${installed.version}" !== "${pluginJson.version}"`);
               }
               const loadedSkills = [...(installed.skills ?? [])].sort();
-              const loadedAgents = [...(installed.agents ?? [])].sort();
+              // agy 1.3.5 listed agent filenames; 1.3.6+ lists frontmatter ids.
+              const agentId = (name) => basename(String(name), ".md");
+              const loadedAgents = [...(installed.agents ?? [])].map(agentId).sort();
+              const expectedAgentIds = expectedAgents.map(agentId);
               if (JSON.stringify(loadedSkills) !== JSON.stringify(expectedSkills)) {
                 fail(`Loaded skills mismatch: expected ${expectedSkills.length}, got ${loadedSkills.length}`);
               }
-              if (JSON.stringify(loadedAgents) !== JSON.stringify(expectedAgents)) {
-                fail(`Loaded agents mismatch: expected ${JSON.stringify(expectedAgents)}, got ${JSON.stringify(loadedAgents)}`);
+              if (JSON.stringify(loadedAgents) !== JSON.stringify(expectedAgentIds)) {
+                fail(`Loaded agents mismatch: expected ${JSON.stringify(expectedAgentIds)}, got ${JSON.stringify(loadedAgents)}`);
               }
             }
 
